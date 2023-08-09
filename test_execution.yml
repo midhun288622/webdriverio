@@ -1,0 +1,30 @@
+name: test_execution
+
+on:
+  workflow_dispatch:
+    inputs:
+      distinct_id:
+      Testcycle:
+        description: "Testcycle"
+        required: true
+        default: "BCDFO-R18"
+
+jobs:
+  Pre_Condition:
+    name: run_pre_Condition
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [16.x]
+        containers: [1]
+        
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - run: npm install
+
+      - run: npm test
+
